@@ -1,66 +1,110 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#100b19">
-<title>LightLux Minecraft AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LAN Buddy</title>
 <style>
-:root{color-scheme:dark;--bg:#0b0811;--panel:#15101f;--purple:#b58cff;--text:#f5f0ff;--muted:#b7abc9;--line:#38294d;--warn:#ffcf85}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#281541 0%,var(--bg) 48%);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-.wrap{max-width:1050px;margin:auto;padding:24px 16px 50px}.top{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:28px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#c4a1ff,#6732ac);color:#160c24;font-weight:900;font-size:22px;box-shadow:0 0 30px #8b5cf644}.eyebrow{color:var(--purple);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.brand h1{font-size:22px;line-height:1.1;margin:2px 0}.status{border:1px solid #6a4c28;background:#281d14;color:var(--warn);padding:8px 12px;border-radius:99px;font-size:13px;font-weight:700}.hero{padding:28px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#21142fdd,#100d18ee);box-shadow:0 16px 50px #0005}.hero h2{font-size:clamp(28px,5vw,44px);line-height:1.08;max-width:700px;margin:8px 0 14px}.hero p{color:var(--muted);max-width:680px;margin:0}.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid var(--line);background:#130e1d;padding:7px 11px;border-radius:99px;color:#dfd1f5;font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}.card{background:#15101fee;border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0}.card h3{margin:0 0 12px;font-size:17px}.field{margin-top:14px}.field label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}.field input,.field select{width:100%;background:#0d0914;border:1px solid #49355f;border-radius:10px;padding:12px;color:var(--text);font:inherit;outline:none}.field input:focus,.field select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #b58cff22}.button{border:0;border-radius:11px;background:linear-gradient(135deg,#c6a5ff,#9460e8);color:#170d24;padding:12px 16px;font-weight:850;font-size:14px;cursor:pointer}.button.secondary{background:#21182e;border:1px solid #49355f;color:var(--text)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.notice{border-left:3px solid var(--purple);padding:11px 13px;background:#21182e;border-radius:0 10px 10px 0;color:#e2d5f5;font-size:14px;margin-top:14px;white-space:pre-line}.muted{color:var(--muted);font-size:14px}.steps{list-style:none;padding:0;margin:0;display:grid;gap:12px}.steps li{display:flex;gap:12px;align-items:flex-start}.num{flex:0 0 28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#332148;color:var(--purple);font-weight:900}.footer{margin-top:20px;text-align:center;color:#8f829f;font-size:12px}
-@media(max-width:680px){.grid{grid-template-columns:1fr}.hero{padding:22px}.wrap{padding:16px 12px 36px}.brand h1{font-size:19px}}
+body {
+  margin: 0;
+  padding: 24px;
+  background: #101426;
+  color: white;
+  font: 17px Arial, sans-serif;
+}
+main {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 24px;
+  background: #202944;
+  border-radius: 18px;
+}
+h1 { color: #b9a2ff; }
+#status { color: #65f0d2; }
+button {
+  margin: 6px 3px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: #a78bfa;
+  color: #17122b;
+  font-weight: bold;
+  cursor: pointer;
+}
+#chat {
+  padding: 15px;
+  min-height: 90px;
+  background: #131b30;
+  border-radius: 10px;
+  white-space: pre-wrap;
+}
 </style>
 </head>
 <body>
-<main class="wrap">
-<header class="top">
- <div class="brand"><div class="logo">LL</div><div><div class="eyebrow">Project LightLux</div><h1>Minecraft AI</h1></div></div>
- <div class="status" id="status">● Bridge not connected</div>
-</header>
-<section class="hero">
- <div class="eyebrow">Bedrock · PS5 · Creative</div>
- <h2>One world. Two players.<br><span style="color:var(--purple)">One AI teammate.</span></h2>
- <p>The goal: host a Creative Superflat Bedrock world, let Lucian join from PS5 as <b>LucianRoma</b>, and connect an AI-controlled player named <b>chatgpt_lightlux</b>.</p>
- <div class="pillrow"><span class="pill">World: Superflat</span><span class="pill">Mode: Creative</span><span class="pill">Player: LucianRoma</span><span class="pill">AI: chatgpt_lightlux</span></div>
-</section>
-<div class="grid">
- <section class="card">
-  <h3>⚙️ World setup</h3><p class="muted">Choose the target settings for the server we still need to configure.</p>
-  <div class="field"><label for="player">Your Minecraft gamertag</label><input id="player" value="LucianRoma" maxlength="32"></div>
-  <div class="field"><label for="bot">AI player name</label><input id="bot" value="chatgpt_lightlux" maxlength="32"></div>
-  <div class="field"><label for="mode">World type</label><select id="mode"><option>Creative Superflat</option><option>Creative Normal</option><option>Survival Normal</option></select></div>
-  <div class="actions"><button class="button" id="save">Save settings</button><button class="button secondary" id="copy">Copy setup</button></div>
-  <p class="muted" id="saveMsg" aria-live="polite">Settings save only in this browser; they don't start a server.</p>
- </section>
- <section class="card">
-  <h3>🧠 AI connection</h3><p class="muted">A website is the dashboard, not the Minecraft server. A separate server and bot bridge must be running before a real connection is possible.</p>
-  <div class="notice"><b>Not connected yet.</b><br>This page does not claim a world is running or that the AI has joined.</div>
-  <div class="field"><label>Components still needed</label><div class="pillrow"><span class="pill">Bedrock server: not set up</span><span class="pill">AI bot: not set up</span><span class="pill">PS5 connection: untested</span></div></div>
- </section>
- <section class="card">
-  <h3>🚀 Build plan</h3><ol class="steps">
-   <li><span class="num">1</span><div><b>Find a host</b><div class="muted">A device or hosting service must run Bedrock server software.</div></div></li>
-   <li><span class="num">2</span><div><b>Connect the PS5</b><div class="muted">Console connection options are limited; we need to test a supported route.</div></div></li>
-   <li><span class="num">3</span><div><b>Add the AI bot</b><div class="muted">A separate program must connect to the server and control the AI player.</div></div></li>
-   <li><span class="num">4</span><div><b>Set operator permissions</b><div class="muted">Configure operator access for your gamertag after joining.</div></div></li>
-  </ol></section>
- <section class="card">
-  <h3>💬 Mission planner</h3><p class="muted">Plan a task for LightLux. This doesn't send commands to Minecraft yet.</p>
-  <div class="field"><label for="command">What should LightLux do?</label><input id="command" placeholder="Example: build a purple base"></div>
-  <div class="actions"><button class="button secondary" id="plan">Create mission brief</button></div>
-  <div class="notice" id="brief" aria-live="polite">Mission briefs will appear here.</div>
- </section>
-</div>
-<p class="footer">LightLux Minecraft AI · Website prototype · No server connection is active</p>
+<main>
+  <h1>🤖 LAN Buddy</h1>
+  <p id="status">Status: Offline</p>
+  <div id="chat">Your AI teammate is ready.</div>
+
+  <button onclick="startWaiting()">Start waiting</button>
+  <button onclick="playerJoined()">Simulate player joining</button>
+  <button onclick="answer(true)">Yes</button>
+  <button onclick="answer(false)">Not yet</button>
+  <button onclick="resetBot()">Reset</button>
 </main>
+
 <script>
-const $=id=>document.getElementById(id);
-function settings(){return {player:$('player').value.trim()||'LucianRoma',bot:$('bot').value.trim()||'chatgpt_lightlux',mode:$('mode').value};}
-$('save').addEventListener('click',()=>{try{localStorage.setItem('lightlux-mc-settings',JSON.stringify(settings()));$('saveMsg').textContent='Saved in this browser. This does not start a server or connect the AI.';}catch(e){$('saveMsg').textContent='Browser storage is unavailable; settings remain in the fields until you leave.';}});
-$('copy').addEventListener('click',async()=>{const s=settings();const t='LightLux Minecraft setup\nYour gamertag: '+s.player+'\nAI name: '+s.bot+'\nWorld: '+s.mode+'\nStatus: server and AI bridge not connected';try{await navigator.clipboard.writeText(t);$('saveMsg').textContent='Setup summary copied.';}catch(e){$('saveMsg').textContent=t;}});
-$('plan').addEventListener('click',()=>{const task=$('command').value.trim();$('brief').textContent=task?'MISSION: '+task+'\nOwner: '+settings().player+'\nAI teammate target: '+settings().bot+'\nNext step: connect a real server and bot bridge before this can become an in-game action.':'Enter a mission first, such as “build a purple base”.';});
-try{const saved=JSON.parse(localStorage.getItem('lightlux-mc-settings')||'null');if(saved){$('player').value=saved.player||'LucianRoma';$('bot').value=saved.bot||'chatgpt_lightlux';$('mode').value=saved.mode||'Creative Superflat';}}catch(e){}
+let state = "idle";
+
+function say(message) {
+  document.getElementById("chat").textContent = message;
+}
+
+function status(message) {
+  document.getElementById("status").textContent =
+    "Status: " + message;
+}
+
+function startWaiting() {
+  state = "waiting";
+  status("Waiting for another player...");
+  say("I'm waiting for someone to join your world.");
+}
+
+function playerJoined() {
+  if (state !== "waiting") {
+    say("Start waiting first!");
+    return;
+  }
+
+  state = "asking";
+  status("Player detected (simulated)");
+  say("Hi! Are you ready?");
+}
+
+function answer(yes) {
+  if (state !== "asking") {
+    say("There isn't a question waiting for an answer yet.");
+    return;
+  }
+
+  if (yes) {
+    state = "playing";
+    status("Ready to play!");
+    say("Awesome! Let's play Minecraft together! 🎮");
+  } else {
+    state = "waiting";
+    status("Waiting for readiness");
+    say("No problem! I'll wait until you're ready.");
+  }
+}
+
+function resetBot() {
+  state = "idle";
+  status("Offline");
+  say("Your AI teammate is ready.");
+}
 </script>
 </body>
 </html>
