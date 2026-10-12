@@ -1,109 +1,75 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LAN Buddy</title>
+<meta name="theme-color" content="#100d1d">
+<title>LightLux Minecraft AI</title>
 <style>
-body {
-  margin: 0;
-  padding: 24px;
-  background: #101426;
-  color: white;
-  font: 17px Arial, sans-serif;
-}
-main {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 24px;
-  background: #202944;
-  border-radius: 18px;
-}
-h1 { color: #b9a2ff; }
-#status { color: #65f0d2; }
-button {
-  margin: 6px 3px;
-  padding: 12px 16px;
-  border: 0;
-  border-radius: 9px;
-  background: #a78bfa;
-  color: #17122b;
-  font-weight: bold;
-  cursor: pointer;
-}
-#chat {
-  padding: 15px;
-  min-height: 90px;
-  background: #131b30;
-  border-radius: 10px;
-  white-space: pre-wrap;
-}
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:#100d1d;color:white;font:16px Arial,sans-serif}
+main{max-width:600px;margin:20px auto;padding:22px;background:#211b35;border:1px solid #7255a5;border-radius:20px}
+h1{color:#b59aff;font-size:28px}
+#status{padding:12px;background:#151020;border-radius:10px;color:#b59aff}
+#chat{min-height:100px;padding:16px;background:#100d1d;border-radius:12px;white-space:pre-wrap;line-height:1.5}
+button{width:100%;margin-top:10px;padding:14px;border:0;border-radius:10px;background:#b59aff;color:#160f25;font-size:16px;font-weight:bold}
+button.secondary{background:#38294e;color:white}
+.note{font-size:13px;line-height:1.5;color:#c9bfdc;margin-top:20px}
 </style>
 </head>
 <body>
 <main>
-  <h1>🤖 LAN Buddy</h1>
-  <p id="status">Status: Offline</p>
-  <div id="chat">Your AI teammate is ready.</div>
+<h1>💜 LightLux Minecraft AI</h1>
+<p>Your friendly Minecraft teammate!</p>
+<p id="status">Status: Offline</p>
+<div id="chat">Hey! I'm LightLux Buddy. Tap Start to try the demo.</div>
 
-  <button onclick="startWaiting()">Start waiting</button>
-  <button onclick="playerJoined()">Simulate player joining</button>
-  <button onclick="answer(true)">Yes</button>
-  <button onclick="answer(false)">Not yet</button>
-  <button onclick="resetBot()">Reset</button>
+<button onclick="start()">Start waiting</button>
+<button class="secondary" onclick="joined()">Test player joined</button>
+<button onclick="answer(true)">Yes, let's play!</button>
+<button class="secondary" onclick="answer(false)">Not yet</button>
+<button class="secondary" onclick="resetBot()">Reset</button>
+
+<p class="note"><b>Prototype notice:</b> This website demo cannot detect your PS5 LAN world or control a Minecraft player yet. The player-joined button is a test. Real gameplay needs a separate compatible bot or bridge.</p>
 </main>
 
 <script>
-let state = "idle";
-
-function say(message) {
-  document.getElementById("chat").textContent = message;
+let state="idle";
+function say(t){document.getElementById("chat").textContent=t}
+function status(t){document.getElementById("status").textContent="Status: "+t}
+function start(){
+ state="waiting";
+ status("Waiting in demo...");
+ say("I'm ready! Tap Test player joined to try the next step.");
 }
-
-function status(message) {
-  document.getElementById("status").textContent =
-    "Status: " + message;
+function joined(){
+ if(state!=="waiting"){
+  say("Tap Start waiting first!");
+  return;
+ }
+ state="asking";
+ status("Player joined (simulated)");
+ say("Hi! Are you ready? 🎮");
 }
-
-function startWaiting() {
-  state = "waiting";
-  status("Waiting for another player...");
-  say("I'm waiting for someone to join your world.");
+function answer(yes){
+ if(state!=="asking"){
+  say("Start waiting and test a player joining first.");
+  return;
+ }
+ if(yes){
+  state="playing";
+  status("Ready to play (demo)");
+  say("Awesome! Let's play Minecraft together! 💜\n\nI'm not connected to your PS5 world yet.");
+ }else{
+  state="waiting";
+  status("Waiting in demo");
+  say("No worries! I'll wait until you're ready.");
+ }
 }
-
-function playerJoined() {
-  if (state !== "waiting") {
-    say("Start waiting first!");
-    return;
-  }
-
-  state = "asking";
-  status("Player detected (simulated)");
-  say("Hi! Are you ready?");
-}
-
-function answer(yes) {
-  if (state !== "asking") {
-    say("There isn't a question waiting for an answer yet.");
-    return;
-  }
-
-  if (yes) {
-    state = "playing";
-    status("Ready to play!");
-    say("Awesome! Let's play Minecraft together! 🎮");
-  } else {
-    state = "waiting";
-    status("Waiting for readiness");
-    say("No problem! I'll wait until you're ready.");
-  }
-}
-
-function resetBot() {
-  state = "idle";
-  status("Offline");
-  say("Your AI teammate is ready.");
+function resetBot(){
+ state="idle";
+ status("Offline");
+ say("Demo reset. Tap Start waiting when you're ready!");
 }
 </script>
 </body>
